@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a11y audit forge</title>
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">a11y</span>
+    <div>
+      <h1>Audit Forge</h1>
+      <p>Paste markup. Get a WCAG 2.2 audit, the focus order and a fix plan.</p>
+    </div>
+  </div>
+  <div class="topmeta">
+    <span id="rule-count" class="chip">loading</span>
+    <span class="chip ghost">local only</span>
+    <span class="chip ghost">no API keys</span>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="panel input-panel">
+    <div class="panel-head">
+      <h2>Markup</h2>
+      <button id="load-sample" class="link-btn" type="button">Load a sample</button>
+    </div>
+
+    <div id="sample-list" class="sample-list"></div>
+
+    <label class="field">
+      <span>Page name (optional)</span>
+      <input id="source-name" type="text" placeholder="checkout-page.html">
+    </label>
+
+    <label class="field">
+      <span>Profile</span>
+      <select id="profile"></select>
+    </label>
+
+    <textarea id="markup" spellcheck="false" placeholder="Paste HTML here, or load a sample."></textarea>
+
+    <div class="actions">
+      <button id="run" class="primary" type="button">Run audit</button>
+      <label class="check"><input id="save" type="checkbox" checked> save to history</label>
+    </div>
+
+    <div class="hint">The audit runs on this machine. Nothing is uploaded.</div>
+  </section>
+
+  <section class="panel results-panel">
+    <div id="empty-state" class="empty-state">
+      <h3>No audit yet</h3>
+      <p>Paste markup on the left and run the audit. You will get a score
+      across five axes, every finding with the evidence that triggered it,
+      the focus order, and a prioritised fix plan.</p>
+    </div>
+
+    <div id="results" class="results hidden">
+      <div class="score-header">
+        <div class="score-number">
+          <span id="score">0</span>
+          <small>/ 100</small>
+        </div>
+        <div class="score-meta">
+          <div id="verdict" class="verdict">-</div>
+          <div id="page-title" class="muted"></div>
+          <div id="count-chips" class="chips"></div>
+        </div>
+      </div>
+
+      <div id="axis-pills" class="axis-pills"></div>
+      <div id="caps" class="caps"></div>
+
+      <nav class="tabs" id="tabs">
+        <button class="tab active" data-tab="findings" type="button">Findings</button>
+        <button class="tab" data-tab="fixes" type="button">Fix plan</button>
+        <button class="tab" data-tab="focus" type="button">Focus order</button>
+        <button class="tab" data-tab="names" type="button">Names</button>
+        <button class="tab" data-tab="wcag" type="button">WCAG</button>
+        <button class="tab" data-tab="markup" type="button">Annotated markup</button>
+      </nav>
+
+      <div id="tab-findings" class="tab-panel">
+        <div id="severity-filters" class="filters"></div>
+        <div id="findings-list" class="finding-list"></div>
+      </div>
+
+      <div id="tab-fixes" class="tab-panel hidden">
+        <div id="fix-list" class="fix-list"></div>
+      </div>
+
+      <div id="tab-focus" class="tab-panel hidden">
+        <div id="focus-table" class="table-wrap"></div>
+      </div>
+
+      <div id="tab-names" class="tab-panel hidden">
+        <div id="name-table" class="table-wrap"></div>
+      </div>
+
+      <div id="tab-wcag" class="tab-panel hidden">
+        <div id="wcag-table" class="table-wrap"></div>
+      </div>
+
+      <div id="tab-markup" class="tab-panel hidden">
+        <div class="markup-head">
+          <p class="muted">Each fix is written above the element it applies
+          to. Copy it into your editor as a starting point.</p>
+          <button id="copy-markup" class="link-btn" type="button">Copy</button>
+        </div>
+        <pre id="annotated" class="code"></pre>
+      </div>
+
+      <div class="export-row">
+        <a id="export-md" class="link-btn" href="#">Export Markdown</a>
+        <a id="export-json" class="link-btn" href="#">Export JSON</a>
+        <span id="export-note" class="muted"></span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="panel history-panel">
+  <div class="panel-head">
+    <h2>History</h2>
+    <button id="refresh-history" class="link-btn" type="button">Refresh</button>
+  </div>
+  <div id="history" class="history"></div>
+</section>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
