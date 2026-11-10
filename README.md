@@ -36,7 +36,7 @@ hard:
 | --- | --- |
 | Score | 0-100, weighted across five axes, with structural caps |
 | Axis pills | Structure and ARIA, Forms and Labels, Images and Media, Keyboard and Focus, Motion and Timing |
-| Findings | 60+ rules, each with severity, WCAG criterion, evidence, why it matters and a concrete fix |
+| Findings | 68 rules, each with severity, WCAG criterion, evidence, why it matters and a concrete fix |
 | Fix plan | Prioritised, with the score after each individual fix |
 | Focus order | Every focusable element in tab order, with its accessible name and where the name came from |
 | Names map | Every interactive element with its computed accessible name and source |
@@ -167,7 +167,7 @@ engine/audit.py         the analyzer and the scoring model
 engine/exports.py       Markdown and JSON exports
 engine/samples.py       the six built-in sample pages
 static/                 dark vanilla JS UI, no build step
-tests/                  51 engine and API tests
+tests/                  56 engine, API and frontend contract tests
 ```
 
 Flask + SQLite + vanilla JS. The engine is pure standard library: the HTML
